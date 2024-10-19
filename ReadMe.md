@@ -73,7 +73,7 @@
 
 ## Пользователи проекта:
 
-1. Superuser: {"email": "admin@hht.com", "password": "admin"}
+1. Superuser: {"email": "admin@udps.com", "password": "admin"}
 
 ## Построен с:
 
