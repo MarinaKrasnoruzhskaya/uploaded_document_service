@@ -7,8 +7,8 @@ class Command(BaseCommand):
     """Класс для кастомной команды создания суперпользователя"""
 
     def handle(self, *args, **options):
-        user = User.objects.create(email="admin@udps.com")
-        user.set_password("admin")
+        user = User.objects.create(email="udps.ad@yandex.ru")
+        user.set_password("Admin123Admin")
         user.is_active = True
         user.is_staff = True
         user.is_superuser = True
