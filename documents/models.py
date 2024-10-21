@@ -13,7 +13,13 @@ class Document(models.Model):
     )
 
     document_url = models.FileField(upload_to='documents', verbose_name='документ для загрузки')
-    author = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='автор документа')
+    author = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name='автор документа',
+        blank=True,
+        null=True
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='дата и время загрузки')
     status = models.CharField(
         max_length=20,
