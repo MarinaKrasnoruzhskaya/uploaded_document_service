@@ -1,3 +1,15 @@
 from django.contrib import admin
 
-# Register your models here.
+from documents.models import Document
+
+
+@admin.register(Document)
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "document_url",
+        "author",
+        "created_at",
+        "status",
+    )
+
