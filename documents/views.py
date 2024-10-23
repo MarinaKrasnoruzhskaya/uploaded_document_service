@@ -1,4 +1,5 @@
 from django.http.response import FileResponse
+from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -7,26 +8,26 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from documents.models import Document
-from documents.serializers import DocumentSerializer, FileViewSerializer
+from documents.serializers import FileViewSerializer, DocumentUploadSerializer
 
 from documents.tasks import send_notification
 
 
-class DocumentViewSet(ModelViewSet):
-    """ Класс-представление для работы с документами """
+class DocumentUploadView(APIView):
+    """ Класс-представление для загрузки документа """
 
-    queryset = Document.objects.all()
-    serializer_class = DocumentSerializer
-    http_method_names = ['post', 'get']
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = (MultiPartParser, FormParser)
 
-    def perform_create(self, serializer):
-        """ Метод для автоматической привязки загруженного документа к авторизованному пользователю и
-        для определения задачи отправки уведомления администратору """
-
-        serializer.save(author=self.request.user)
-        id_ = serializer.data['id']  # Получаем ID нового документа для отправки письма
-        send_notification.delay(id_)
+    def post(self, request):
+        document_serializer = DocumentUploadSerializer(data=request.data)
+        if document_serializer.is_valid():
+            document = document_serializer.save()
+            document.author = request.user
+            document.save()
+            send_notification.delay(document.id)  # Отправка письма администратору
+            return Response(document_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(document_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class FileView(APIView):
