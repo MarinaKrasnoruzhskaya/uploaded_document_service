@@ -12,7 +12,7 @@ class Document(models.Model):
         ('document rejected', 'документ отклонен'),
     )
 
-    document_url = models.FileField(upload_to='documents', verbose_name='документ для загрузки')
+    document = models.FileField(upload_to='documents', verbose_name='документ для загрузки')
     author = models.ForeignKey(
         AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -29,7 +29,7 @@ class Document(models.Model):
     )
 
     def __str__(self):
-        return f"{self.author} {self.document_url}"
+        return f"{self.author}: {self.document}"
 
     class Meta:
         verbose_name = "документ"

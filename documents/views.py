@@ -37,8 +37,9 @@ class FileView(APIView):
     permission_classes = [AllowAny,]
     parser_classes = [MultiPartParser, FormParser]
 
-    def get(self, request, document_url):
+    def get(self, request, document):
         """ Метод для получения файла по его url и отправки его в виде скачиваемого файла """
 
-        document = get_object_or_404(Document, document_url=f"documents/{document_url}")
-        return FileResponse(document.document_url, as_attachment=True)
+        document_obj = get_object_or_404(Document, document=f"documents/{document}")
+        print(document)
+        return FileResponse(document_obj.document, as_attachment=True)

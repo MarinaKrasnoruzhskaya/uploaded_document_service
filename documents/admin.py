@@ -10,7 +10,7 @@ from documents.tasks import send_notification
 class DocumentAdmin(admin_confirm.AdminConfirmMixin, admin.ModelAdmin):
     list_display = (
         "id",
-        "document_url",
+        "document",
         "author",
         "created_at",
         "status",

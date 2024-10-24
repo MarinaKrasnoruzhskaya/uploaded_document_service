@@ -16,7 +16,7 @@ def send_notification(pk: int):
         admin = User.objects.get(is_superuser=True)
         send_mail(
             subject=f"Загружен новый документ!",
-            message=f"Пользователем {document.author} загружен новый документ {document.document_url}",
+            message=f"Пользователем {document.author} загружен новый документ {document.document}",
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[admin.email],
             fail_silently=False,

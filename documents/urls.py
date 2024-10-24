@@ -7,5 +7,5 @@ app_name = DocumentsConfig.name
 
 urlpatterns = [
     path('document/upload/', DocumentUploadView.as_view(), name='upload'),
-    path('media/documents/<str:document_url>/', FileView.as_view()),
+    path('media/documents/<str:document>/', FileView.as_view()),
 ]
