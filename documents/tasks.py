@@ -15,7 +15,7 @@ def send_notification(pk: int):
     if document.status == 'document uploaded':
         admin = User.objects.get(is_superuser=True)
         send_mail(
-            subject=f"Загружен новый документ!",
+            subject="Загружен новый документ!",
             message=f"Пользователем {document.author} загружен новый документ {document.document}",
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[admin.email],
@@ -23,7 +23,7 @@ def send_notification(pk: int):
         )
     else:
         send_mail(
-            subject=f"Изменение статуса документа!",
+            subject="Изменение статуса документа!",
             message=f"Статус документа {document} изменен на {document.status}",
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[document.author.email],
