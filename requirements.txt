@@ -9,6 +9,7 @@ click-plugins==1.1.1
 click-repl==0.3.0
 Django==5.1.2
 django-admin-confirm==1.0.0
+django-cors-headers==4.5.0
 djangorestframework==3.15.2
 djangorestframework-simplejwt==5.3.1
 drf-spectacular==0.27.2
