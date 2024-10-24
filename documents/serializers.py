@@ -11,7 +11,7 @@ class DocumentUploadSerializer(ModelSerializer):
 
     class Meta:
         model = Document
-        fields = ('document_url',)
+        fields = ('document_url', 'status', 'author')
 
 
 class FileViewSerializer(ModelSerializer):
