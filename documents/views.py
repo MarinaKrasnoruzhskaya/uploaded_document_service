@@ -2,10 +2,9 @@ from django.http.response import FileResponse
 from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet
 
 from documents.models import Document
 from documents.serializers import FileViewSerializer, DocumentUploadSerializer
@@ -16,6 +15,7 @@ from documents.tasks import send_notification
 class DocumentUploadView(APIView):
     """ Класс-представление для загрузки документа """
 
+    serializer_class = DocumentUploadSerializer
     parser_classes = (MultiPartParser, FormParser)
 
     def post(self, request):
