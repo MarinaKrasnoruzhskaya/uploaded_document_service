@@ -26,6 +26,8 @@ class DocumentAdmin(admin_confirm.AdminConfirmMixin, admin.ModelAdmin):
         в списке действий """
 
         queryset.update(status="document confirmed")
+        for document in queryset:
+            send_notification.delay(document.pk)
 
     @admin.action(description="Отклонить выбранные документы")
     def make_rejected(self, request, queryset):
@@ -33,6 +35,8 @@ class DocumentAdmin(admin_confirm.AdminConfirmMixin, admin.ModelAdmin):
         в списке действий """
 
         queryset.update(status="document rejected")
+        for document in queryset:
+            send_notification.delay(document.pk)
 
     @transaction.atomic
     def save_model(self, request, obj, form, change):
