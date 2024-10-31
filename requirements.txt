@@ -24,7 +24,7 @@ psycopg2-binary==2.9.10
 PyJWT==2.9.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
-python-magic==0.4.27
+python-magic==0.4.13
 PyYAML==6.0.2
 redis==5.1.1
 referencing==0.35.1
