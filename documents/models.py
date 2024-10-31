@@ -12,7 +12,7 @@ class Document(models.Model):
         ('document rejected', 'документ отклонен'),
     )
 
-    document = models.FileField(upload_to='documents', verbose_name='документ для загрузки')
+    document = models.FileField(upload_to='documents', verbose_name='загруженный документ')
     author = models.ForeignKey(
         AUTH_USER_MODEL,
         on_delete=models.CASCADE,
